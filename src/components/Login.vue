@@ -42,32 +42,32 @@ export default {
     return {
       //  登录表单的数据绑定对象
       loginFrom: {
-        username: "admin",
-        password: "123456"
+        username: 'admin',
+        password: '123456'
       },
       // 表单的验证对象
       loginFromRules: {
         // 验证用户名
         username: [
-          { required: true, message: "请输入用户名", trigger: "blur" }
+          { required: true, message: '请输入用户名', trigger: 'blur' }
         ],
         // 验证密码
-        password: [{ required: true, message: "请输入密码", trigger: "blur" }]
+        password: [{ required: true, message: '请输入密码', trigger: 'blur' }]
       }
-    };
+    }
   },
   methods: {
     //重置表单
     resetLoginForm() {
       // console.log(this)
-      this.$refs.loginFromRef.resetFields();
+      this.$refs.loginFromRef.resetFields()
     },
     // 登录表单
     submitForm() {
       this.$refs.loginFromRef.validate(async valid => {
-        if (!valid) return;
+        if (!valid) return
         // console.log(this)
-        const { data: res } = await this.$http.post("login", this.loginFrom);
+        const { data: res } = await this.$http.post('login', this.loginFrom)
         // console.log(res);
         if (res.meta.status !== 200) return this.$message.error('登录失败')
         this.$message.success('登录成功')
@@ -76,22 +76,22 @@ export default {
          * 登录成功后 token, 保存到客户端的 sessionStorage中
          * 项目中的除了登录之外的API接口，必须在登陆之后才能访问
          * token 只应该在当前网站打开期间生效，所以将 token 保存在 sessionStorage
-         * 
+         *
          */
         window.sessionStorage.setItem('token', res.data.token)
         // 成功后跳转到后台页面  /home
         this.$router.push('/home')
-      });
+      })
     }
   }
-};
+}
 </script>
 
 
 <style lang="less" scoped>
 .login-container {
   // background-color: #2b4b6b;
-  background-image: url("../assets/kakushigoto.jpg");
+  background-image: url('../assets/kakushigoto.jpg');
   background-repeat: no-repeat;
   background-size: cover;
   height: 100%;
